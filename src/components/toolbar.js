@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 
 export default class Toolbar extends Component {
-  
   render() {
     return (
       <div className="toolbar">
-        <input type="number" value={this.props.gridSize} min="1" onChange={(e)=>this.props.setGridSize(e.target.value)}/>
+        <h1>Pixel Canvas</h1>
+        <label>
+          Grid Size: <input 
+                      type="number"
+                      value={this.props.getGridSize}
+                      onChange={ e => this.props.setGridSize(e.target.value) }
+                      on
+                      />
+        </label>
       </div>
     );
   }

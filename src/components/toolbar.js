@@ -10,7 +10,6 @@ export default class Toolbar extends Component {
                       type="number"
                       value={this.props.gridSize}
                       onChange={ e => this.props.setGridSize(e.target.value) }
-                      on
                       />
         </label>
       </div>

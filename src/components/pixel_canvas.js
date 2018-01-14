@@ -4,7 +4,7 @@ export default class PixelCanvas extends Component {
 
   renderGrid(){
     const grid = [];
-    for(let i = 1; i <= this.props.gridSize; i++){
+    for(let i = 1; i <= Math.pow(this.props.gridSize, 2); i++){
       grid.push(
         <div key={i} className={"square square_" + i}>{i}</div>
       )

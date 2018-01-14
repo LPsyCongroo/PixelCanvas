@@ -6,15 +6,15 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      gridSize: 9
+      gridSize: 3
     }
     this.setGridSize = this.setGridSize.bind(this);
   }
 
   // A callback to set the size of the pixel canvas grid
   setGridSize(newGridSize) {
-    if(newGridSize < 9)
-      this.setState({ gridSize: 9 });
+    if(newGridSize < 3)
+      this.setState({ gridSize: 3 });
     else if(newGridSize > 128)
       this.setState({ gridSize: 128 });
     else

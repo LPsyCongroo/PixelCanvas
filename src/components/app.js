@@ -8,12 +8,19 @@ class App extends Component {
     this.state = {
       gridSize: 1
     }
+    this.setGridSize = this.setGridSize.bind(this);
   }
+
+  // A callback to set the size of the pixel canvas grid
+  setGridSize(newGridSize) {
+    this.setState({ gridSize: newGridSize});
+  }
+
   render() {
     return (
       <div className="app">
-        <Toolbar/>
-        <PixelCanvas/>
+        <Toolbar setGridSize={this.setGridSize} gridSize={this.state.gridSize}/>
+        <PixelCanvas gridSize={this.state.gridSize}/>
       </div>
     );
   }

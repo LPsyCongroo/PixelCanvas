@@ -3,3 +3,17 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.pixel-canvas{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  min-height: 100vh;
+}
+.square{
+  background: #cba;
+}
+
+.square:nth-child(odd){
+  background: #987;
+}

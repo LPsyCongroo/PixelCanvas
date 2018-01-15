@@ -5,13 +5,15 @@ export default class Toolbar extends Component {
     return (
       <div className="toolbar">
         <h1>Pixel Canvas</h1>
-        <label>
-          Grid Size: <input 
-                      type="number"
-                      value={this.props.gridSize}
-                      onChange={ e => this.props.setGridSize(e.target.value) }
-                      />
-        </label>
+        <div className="widgets">
+          <label>
+            Grid Size: <input 
+                        type="number"
+                        value={this.props.gridSize}
+                        onChange={ e => this.props.setGridSize(e.target.value) }
+                        />
+          </label>
+        </div>
       </div>
     );
   }

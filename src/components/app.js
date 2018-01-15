@@ -12,11 +12,13 @@ class App extends Component {
       gridSize: gridMin,
       currentCanvas: this.buildCanvas(gridMin),
       wasPainted: false,
-      color: "rgba(0,0,0,1)"
+      color: {hex:"#000"}
     }
 
     this.setGridSize = this.setGridSize.bind(this);
     this.paintPixel = this.paintPixel.bind(this);
+    this.selectColor = this.selectColor.bind(this);
+    
   }
 
   /**
@@ -79,10 +81,22 @@ class App extends Component {
     });
   }
 
+  selectColor(color){
+    this.setState({ color: color.hex })
+  }
+
   render() {
     return (
       <div className="app">
-        <Toolbar setGridSize={this.setGridSize} gridSize={this.state.gridSize}/>
+        <Toolbar 
+          // Handlers
+          setGridSize={this.setGridSize} 
+          selectColor={this.selectColor}
+          
+          // State passed as props
+          gridSize={this.state.gridSize}
+          color={this.state.color}          
+        />
         <PixelCanvas gridSize={this.state.gridSize} paintPixel={this.paintPixel} canvas={this.state.currentCanvas}/>
       </div>
     );

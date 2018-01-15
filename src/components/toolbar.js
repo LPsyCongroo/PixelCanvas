@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ChromePicker } from 'react-color';
+import { ChromePicker, CirclePicker } from 'react-color';
 
 export default class Toolbar extends Component {
 
@@ -8,7 +8,7 @@ export default class Toolbar extends Component {
       <div className="toolbar">
         <h1>Pixel Canvas</h1>
         <div className="widgets">
-          <div className="widget-grid-size">
+          <div className="card widget widget-grid-size">
             <label htmlFor="grid-size">
               Grid Size: {this.props.gridSize}x{this.props.gridSize}
             </label>
@@ -21,8 +21,12 @@ export default class Toolbar extends Component {
               onChange={ e => this.props.setGridSize(e.target.value) }
               />
           </div>
-          <div className="widget-color-picker">
+          <div className="widget widget-color-picker">
             <ChromePicker color={this.props.color} onChangeComplete={this.props.selectColor}/>          
+          </div>
+          <div className="card widget widget-color-palette">
+            <div className="label">Palette</div>
+            <CirclePicker colors={this.props.palette}/>
           </div>
         </div>
       </div>

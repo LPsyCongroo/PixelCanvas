@@ -116,7 +116,8 @@ class App extends Component {
           
           // State passed as props
           gridSize={this.state.gridSize}
-          color={this.state.color}          
+          color={this.state.color}
+          palette={this.state.palette}       
         />
         <PixelCanvas gridSize={this.state.gridSize} paintPixel={this.paintPixel} canvas={this.state.canvas}/>
       </div>

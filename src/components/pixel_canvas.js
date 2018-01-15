@@ -7,7 +7,12 @@ export default class PixelCanvas extends Component {
     const grid = [];
     for(let i = 0; i < Math.pow(this.props.gridSize, 2); i++){
       grid.push(
-        <div key={i} className={"square"} ></div>
+        <div 
+          key={i}
+          className={"pixel"}
+          onClick={e => this.props.paintPixel(i)} 
+          style={{ backgroundColor: this.props.canvas[i]}} 
+        ></div>
       )
     }
     return grid;

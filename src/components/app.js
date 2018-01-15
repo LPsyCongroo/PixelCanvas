@@ -9,11 +9,27 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      gridSize: 0,
-      currentCanvas: [],
-      canvasWasPainted: false
+      gridSize: gridMin,
+      currentCanvas: this.buildCanvas(gridMin),
+      wasPainted: false,
+      color: "rgba(0,0,0,1)"
     }
+
     this.setGridSize = this.setGridSize.bind(this);
+    this.paintPixel = this.paintPixel.bind(this);
+  }
+
+  /**
+   * Return a new array representing a canvas
+   * 
+   * @param {number} gridSize 
+   */
+  buildCanvas(gridSize){
+    const canvas = [];
+    for(let i = 0; i < Math.pow(gridSize, 2); i++){
+      canvas.push("rgba(255,255,255,0)");
+    }
+    return canvas;
   }
 
   /**
@@ -24,7 +40,7 @@ class App extends Component {
    */
   setGridSize(value) {
     // Let you know if you're about to erase your work.
-    if(this.state.canvasWasPainted 
+    if(this.state.wasPainted 
       && !window.confirm("Changing the canvas size now will make you lose your work!  Are you sure?")
     )return;
 
@@ -40,30 +56,34 @@ class App extends Component {
     }
     
     const newGridSize = validateNGS();
-    const newCanvas = [];
-    
-    for(let i = 0; i < newGridSize; i++){
-      newCanvas.push("rgba(255,255,255)");
-    }
 
     this.setState({ 
       gridSize: newGridSize,
-      currentCanvas: newCanvas
+      currentCanvas: this.buildCanvas(newGridSize),
+      wasPainted: false
     });
   }
 
+  /**
+   * Callback to set state for currentCanvas.
+   * Sets wasPainted to true. 
+   * 
+   * @param {number} key - key prop
+   */
+  paintPixel(key){
+    this.setState(prevState => {
+      const newCanvas = [...prevState.currentCanvas];
+      newCanvas[key] = this.state.color;
 
-
-  // Set initial state
-  componentWillMount() {
-    this.setGridSize(gridMin);
+      return { currentCanvas: newCanvas, wasPainted: true };
+    });
   }
 
   render() {
     return (
       <div className="app">
         <Toolbar setGridSize={this.setGridSize} gridSize={this.state.gridSize}/>
-        <PixelCanvas gridSize={this.state.gridSize}/>
+        <PixelCanvas gridSize={this.state.gridSize} paintPixel={this.paintPixel} canvas={this.state.currentCanvas}/>
       </div>
     );
   }

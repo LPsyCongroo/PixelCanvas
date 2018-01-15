@@ -40,11 +40,11 @@ label{
   height: 100vh;
   width: 100vh;
 }
-.square{
+.pixel{
   box-sizing: border-box;
   border: 1px solid #ddd;
 }
-.square:hover{
+.pixel:hover{
   background: #ddd;
 }
 

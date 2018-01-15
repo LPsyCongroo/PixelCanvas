@@ -28,20 +28,17 @@ label{
 }
 
 .pixel-canvas{
+  font-size: 0.5rem;
   box-sizing: border-box;
   background: white;
-  border: 1px solid black;
+  border: 1px solid #ddd;
   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  min-height: 200px;
-  min-width: 200px;
   height: 100vh;
   width: 100vh;
 }
 .square{
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid #ddd;
 }
 .square:hover{
   background: #ddd;

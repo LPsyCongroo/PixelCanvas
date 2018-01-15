@@ -15,8 +15,8 @@ class App extends Component {
   setGridSize(newGridSize) {
     if(newGridSize < 3)
       this.setState({ gridSize: 3 });
-    else if(newGridSize > 128)
-      this.setState({ gridSize: 128 });
+    else if(newGridSize > 32)
+      this.setState({ gridSize: 32 });
     else
       this.setState({ gridSize: newGridSize});
 

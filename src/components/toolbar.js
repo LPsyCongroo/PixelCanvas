@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 
 export default class Toolbar extends Component {
+
   render() {
     return (
       <div className="toolbar">

@@ -10,9 +10,10 @@ class App extends Component {
     super(props);
     this.state = {
       gridSize: gridMin,
-      currentCanvas: this.buildCanvas(gridMin),
+      canvas: this.buildCanvas(gridMin),
       wasPainted: false,
-      color: {hex:"#000"}
+      color: "rgba(0,0,0,1)",
+      palette: []
     }
 
     this.setGridSize = this.setGridSize.bind(this);
@@ -29,7 +30,7 @@ class App extends Component {
   buildCanvas(gridSize){
     const canvas = [];
     for(let i = 0; i < Math.pow(gridSize, 2); i++){
-      canvas.push("rgba(255,255,255,0)");
+      canvas.push("rgba(0,0,0,0)");
     }
     return canvas;
   }
@@ -61,28 +62,48 @@ class App extends Component {
 
     this.setState({ 
       gridSize: newGridSize,
-      currentCanvas: this.buildCanvas(newGridSize),
+      canvas: this.buildCanvas(newGridSize),
       wasPainted: false
     });
   }
 
+  updatePalette() {
+    const palette = [];
+    
+    this.state.canvas.forEach(color => {
+      if(palette.indexOf(color) === -1)
+        palette.push(color);
+    });
+
+    this.setState({ palette })
+  }
+
   /**
-   * Callback to set state for currentCanvas.
+   * Callback to set state for canvas.
    * Sets wasPainted to true. 
+   * 
+   * Calls the update palette function after setting state.
    * 
    * @param {number} key - key prop
    */
   paintPixel(key){
     this.setState(prevState => {
-      const newCanvas = [...prevState.currentCanvas];
-      newCanvas[key] = this.state.color;
+      // Paint the canvas
+      const color = this.state.color;
+      const newCanvas = [...prevState.canvas];
+      newCanvas[key] = color;
 
-      return { currentCanvas: newCanvas, wasPainted: true };
-    });
+      return { 
+        canvas: newCanvas,
+        wasPainted: true ,
+      }
+    }, this.updatePalette);
   }
-
+ 
+  // Convert color object to CSS and set state
   selectColor(color){
-    this.setState({ color: color.hex })
+    const {r,g,b,a} = color.rgb;    
+    this.setState({ color: `rgba(${r},${g},${b},${a})` })
   }
 
   render() {
@@ -97,7 +118,7 @@ class App extends Component {
           gridSize={this.state.gridSize}
           color={this.state.color}          
         />
-        <PixelCanvas gridSize={this.state.gridSize} paintPixel={this.paintPixel} canvas={this.state.currentCanvas}/>
+        <PixelCanvas gridSize={this.state.gridSize} paintPixel={this.paintPixel} canvas={this.state.canvas}/>
       </div>
     );
   }

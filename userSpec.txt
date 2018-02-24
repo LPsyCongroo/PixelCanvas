@@ -1,0 +1,60 @@
+Pixel Canvas
+
+A React Component that generates pixel art using divs and CSS grid.
+It comes in 9x16 or a Square
+It can have one image, or several as an animation
+You can set the time between frames
+You can set whether it is a blending change or instant change
+You can have a mouse hover effect
+  Select the color
+  Or select the HSL/rgba shift
+  Select the radius
+
+You can apply built-in animations
+  color cycles (cycles through all the colors)
+  Side Scroller (shifts pixels to the side for each frame)
+  Random colors (any random colors)
+  Random Positions (any color from the original in a random position)
+  
+
+Pixel Canvas Editor
+
+// You can use an image behind it as a reference
+//   You can drag it freely
+//   You can position it automatically
+//     center
+//     top
+//     left
+//     center
+//     right
+//     bottom
+//   You can adjust the opacity
+//   You can adjust whether it is on top of or under the pixelcanvas
+
+You can drag across the screen
+You can adjust the size of the brush
+You can use an eraser tool
+You can use a line tool
+You can use a box tool
+  Filled
+You have a palette of all the colors you have already used
+You can select a pixel and adjust the color after painting
+You can apply color transforms to the pixels, such as
+  contrast
+  hue shift
+  saturation
+  tone curve?
+You can select multiple pixels with shift
+You can select multiple pixels by shift and dragging
+You can use a piant bucket tool
+  Flood-fill algorithm
+You can save frames
+  You can scrub between frames you've made
+  You can have onion skinning
+You can use an ink dropper to tool to select a color from a pixel
+You can undo and redo actions (so long as they haven't been overwritten)
+You can zoom in and out with the scroll / pinch
+
+You can decide animations between frames and drag them into position
+You can decide individual frame times and whether they transition by click or time or both
+Transitions before loops are done from tranparent pixels

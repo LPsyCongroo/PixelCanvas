@@ -1,23 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import './css/index.css'
+
 import App from './components/app';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-/**
- * Some features for consideration:
- * 
- * Color picker tool
- * Save colors used in picture already
- * 
- * Save and export html and css data
- * 
- * Create animations by saving frames
- * 
- * Create onRender animations (for example, cycle through all colors used)
- * 
- * These will probably require Redux data
- */
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware}>
+    <App/>
+  </Provider>
+, document.getElementById('root'));

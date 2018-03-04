@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import color from '../assets/color';
+import { resizeSidebar } from '../actions';
 
 const StyledSidebar = styled.section`
-  width: 20vw;
+  position: absolute;
+  z-index: 1;
+  width: ${props => props.sidebarWidth || 200}px;
   max-width: 320px;
-  resize: horizontal;
-  overflow: auto;
-  background: palegoldenrod;
+  height: 100%;
+  float: left;
+  background: ${ color.black };
 `;
 
-export default class Sidebar extends Component{
-  constructor(props){
-    super(props);
-  }
+class Sidebar extends Component{
   render(){
     return (
-      <StyledSidebar>
-        
+      <StyledSidebar sidebarWidth={this.props.width} >
       </StyledSidebar>
     );
   }
 }
+
+function mapStateToProps(state){
+  return {}
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

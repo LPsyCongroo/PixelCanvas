@@ -1,4 +1,10 @@
-html,body {
+*,*::after,*::before,html,body {
   margin: 0;
   padding: 0;
+}
+
+html,body{
+  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
 }

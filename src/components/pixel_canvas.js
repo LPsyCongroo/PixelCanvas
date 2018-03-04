@@ -1,3 +1,5 @@
+// A react component for use on your own website
+
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
@@ -5,11 +7,15 @@ const StyledCanvasGrid = styled.div`
       display: grid;
       grid-template-rows: repeat( ${props => props.y} , 1fr);
       grid-template-columns: repeat( ${props => props.x} , 1fr);
-      width: ${props => props.x * 20}px;
-      height: ${props => props.y * 20}px;
+      width: ${props => props.x * 30}px;
+      height: ${props => props.y * 30}px;
       > div{
         background: white;
-        border: solid 1px black;
+        box-sizing: border-box;
+        border: solid 1px #ddd;
+        &:hover{
+          background: #ddd;
+        }
       }
     `;
 

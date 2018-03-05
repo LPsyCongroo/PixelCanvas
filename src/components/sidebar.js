@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import color from '../assets/color';
-import { resizeSidebar } from '../actions';
 
 const StyledSidebar = styled.section`
   position: absolute;

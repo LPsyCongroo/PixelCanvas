@@ -6,17 +6,18 @@ import color from '../assets/color';
 const MenuUl = styled.ul`
   display: flex;
   justify-content: left;
-  height: 24px;
+  height: 1.5rem;
+  font-size: 0.875rem;
 `
 const MenuLi = styled.li`
   position: relative;
-  color: white;
   padding: 0 0.6rem;
   list-style: none;
-  line-height: 24px;
+  line-height: 1.5rem;
   cursor: default;
   &:hover{
-    background: ${color.black};
+    background: ${color.yellow};
+    color: ${color.black};
   }
 
   &:hover > ul {
@@ -29,23 +30,24 @@ const MenuLi = styled.li`
     color: ${color.black};
     padding: 0 1.2rem;
     &:hover {
-      color: white;
+      background: ${color.grey1};
+      color: ${color.white};
     }
   `}
 `
 const DropDownUl = styled.ul`
   display: none;
   position: absolute;
-  top: 24px;
+  top: 1.5rem;
   left: 0;
   z-index: 10;
   background: ${color.yellow};
-  width: 240px;
+  width: 15rem;
   box-shadow: 2px 4px 4px rgba(0,0,0,0.25);
 `
 
 const ShortCut = styled.div`
-  opacity: 0.5;
+  opacity: 0.7;
   text-align: right;  
 `
 

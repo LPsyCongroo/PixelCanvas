@@ -7,6 +7,7 @@ import color from '../assets/color';
 const MenuUl = styled.ul`
   display: flex;
   justify-content: left;
+  width: 20rem;
   height: 1.5rem;
   font-size: 0.875rem;
 `;
@@ -16,14 +17,16 @@ const MenuLi = styled.li`
   list-style: none;
   line-height: 1.5rem;
   cursor: default;
-  &:hover{
+
+  ${props => props.active && css`
     background: ${color.yellow};
     color: ${color.black};
-  }
 
-  &:hover > ul {
-    display: block;
-  }
+    & > ul {
+      display: block;
+    }
+  `}
+
 
   ${props => props.dropDown && css`
     display: flex;
@@ -100,7 +103,16 @@ const menu = {
 
 // React Component
 export default class Menu extends Component{
-// Dynamically create all the menu navigation elements
+  constructor(props){
+    super(props);
+    this.state = {
+      isActive: false,
+      activeMenu: null
+    }
+
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+  }
+
   renderMenu(){
     // The menu is an array of menu components with hidden drop downs
     const RenderedMenu = [];
@@ -122,9 +134,12 @@ export default class Menu extends Component{
           </MenuLi>
         );
       });
-
       RenderedMenu.push(
-        <MenuLi key={menuComponent}>
+        <MenuLi 
+          key={menuComponent} 
+          active={this.state.activeMenu === this.menuComponent}
+          onMouseEnter={(e)=>this.handleHover(e, menuComponent)}
+        >
           {menuComponent}
           <DropDownUl>
             {dropDownList}
@@ -134,10 +149,37 @@ export default class Menu extends Component{
     };
     return RenderedMenu;
   }
+
+  handleHover(e, menuComp){
+    if(this.state.isActive){
+      this.setState({activeMenu: menuComp})
+    }
+  }
+
+  handleMenuClick(e){
+    e.stopPropagation();
+    this.setState({isActive: true})
+  }
+
+  handleWindowClick(e){
+    if(this.state.isActive){
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      this.setState({isActive:false, activeMenu: null });
+    }
+  }
+
+  componentDidMount(){
+    window.addEventListener('click', this.handleWindowClick);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('click', this.handleWindowClick)
+  }
   
   render(){
     return (
-      <MenuUl>
+      <MenuUl onClick={(e) => this.handleMenuClick(e)}>
         {this.renderMenu()}
       </MenuUl>
     );

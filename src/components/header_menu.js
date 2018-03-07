@@ -17,10 +17,18 @@ const MenuLi = styled.li`
   list-style: none;
   line-height: 1.5rem;
   cursor: default;
-
+  &:hover {
+      background: ${color.grey1};
+      color: ${color.white};
+  }
   ${props => props.active && css`
     background: ${color.yellow};
     color: ${color.black};
+
+    &:hover{
+      background: ${color.yellow};
+      color: ${color.black};
+    }
 
     & > ul {
       display: block;
@@ -33,10 +41,7 @@ const MenuLi = styled.li`
     justify-content: space-between;
     color: ${color.black};
     padding: 0 1.2rem;
-    &:hover {
-      background: ${color.grey1};
-      color: ${color.white};
-    }
+    
   `}
 `;
 const DropDownUl = styled.ul`
@@ -137,7 +142,7 @@ export default class Menu extends Component{
       RenderedMenu.push(
         <MenuLi 
           key={menuComponent} 
-          active={this.state.activeMenu === this.menuComponent}
+          active={this.state.activeMenu === menuComponent}
           onMouseEnter={(e)=>this.handleHover(e, menuComponent)}
         >
           {menuComponent}
@@ -158,7 +163,7 @@ export default class Menu extends Component{
 
   handleMenuClick(e){
     e.stopPropagation();
-    this.setState({isActive: true})
+    this.setState({isActive: true, activeMenu: e.target.innerText})
   }
 
   handleWindowClick(e){

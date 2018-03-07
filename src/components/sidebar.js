@@ -1,35 +1,44 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import color from '../assets/color';
+import SidebarToolbar from './sidebar_toolbar';
+import SidebarTab from './sidebar_tab';
 
 const StyledSidebar = styled.section`
   position: absolute;
   z-index: 1;
-  width: ${props => props.sidebarWidth || 200}px;
-  max-width: 320px;
+  width: ${props => props.sidebarWidth || 0}px;
+  min-width: 15rem;
+  max-width: 20rem;
   height: 100%;
   float: left;
   background: ${ color.black };
 `;
 
-class Sidebar extends Component{
+export default class Sidebar extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      mode: "EDIT"
+    }
+    this.handleSetMode = this.handleSetMode.bind(this);
+  }
+
+  handleSetMode(newMode){
+    this.setState({
+      mode: newMode
+    });
+  }
+
   render(){
+    
     return (
-      <StyledSidebar sidebarWidth={this.props.width} >
+      <StyledSidebar >
+        <SidebarTab mode={this.state.mode} setMode={this.handleSetMode} />
+        <SidebarToolbar mode={this.state.mode} />
+        <hr/>
       </StyledSidebar>
     );
   }
 }
-
-function mapStateToProps(state){
-  return {}
-}
-
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -3,12 +3,13 @@ import styled, { css } from 'styled-components';
 
 import color from '../assets/color';
 
+// Styled Components
 const MenuUl = styled.ul`
   display: flex;
   justify-content: left;
   height: 1.5rem;
   font-size: 0.875rem;
-`
+`;
 const MenuLi = styled.li`
   position: relative;
   padding: 0 0.6rem;
@@ -34,7 +35,7 @@ const MenuLi = styled.li`
       color: ${color.white};
     }
   `}
-`
+`;
 const DropDownUl = styled.ul`
   display: none;
   position: absolute;
@@ -44,13 +45,15 @@ const DropDownUl = styled.ul`
   background: ${color.yellow};
   width: 15rem;
   box-shadow: 2px 4px 4px rgba(0,0,0,0.25);
-`
+`;
 
 const ShortCut = styled.div`
   opacity: 0.7;
   text-align: right;  
-`
+`;
 
+// Dummy state to be populated later, including a prop for an onClick action dispatch.
+// It will be updated if user shortcut preferences are updated.
 const menu = {
   File:[
     { label: "New File", shortcut: "Ctrl + N" },
@@ -90,37 +93,45 @@ const menu = {
     { label: "Delete Current Frame...", shortcut: "" },    
   ],
   Help: [
-    { label: "Docs", shortcut: "" },
-    { label: "Github", shortcut: "" },    
+    { label: "Docs"},
+    { label: "Github"},    
   ]
 }
 
+// React Component
 export default class Menu extends Component{
-
+// Dynamically create all the menu navigation elements
   renderMenu(){
-    const keys = Object.keys(menu)
+    // The menu is an array of menu components with hidden drop downs
     const RenderedMenu = [];
 
-    keys.forEach(key => {
-      const dropDownList = [];
-      menu[key].forEach(item => {
-        dropDownList.push(
-          <MenuLi key={item.label} dropDown onClick={() => console.log(item.label + ' was clicked!')}>
-            <div>{item.label}</div>
-            <ShortCut>{item.shortcut}</ShortCut>
+    for(let menuComponent in menu){
+      // In turn, each menu component is an array of drop-down components
+      const dropDownList = menu[menuComponent].map(dropDownComponent => {
+        // Not all drop-down components will have a shortcut
+        const shortcut = dropDownComponent.shortcut ? <ShortCut>{dropDownComponent.shortcut}</ShortCut> : null;
+
+        return (
+          <MenuLi 
+            key={dropDownComponent.label} 
+            dropDown 
+            onClick={() => console.log(dropDownComponent.label + ' was clicked!')
+          }>
+            <div>{dropDownComponent.label}</div>
+            {shortcut}
           </MenuLi>
-        )
-      })
+        );
+      });
 
       RenderedMenu.push(
-        <MenuLi key={key}>
-          {key}
+        <MenuLi key={menuComponent}>
+          {menuComponent}
           <DropDownUl>
             {dropDownList}
           </DropDownUl>
         </MenuLi>
       )
-    });
+    };
     return RenderedMenu;
   }
   

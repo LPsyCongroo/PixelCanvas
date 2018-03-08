@@ -9,17 +9,22 @@ const State = {
     data: {
       xDimensions: 32, // Number of pixels, so it can be multiples of 16
       yDimensions: 18,   
-      timeline: [
+      timeline: [ //maybe a linked list would be a good idea...
         {
           type: 'FRAME',
           canvas: [pixel], // each pixel is a color object has HEX, HSL, and RGB + alpha values
           frameTime: 1000, // ms
-          transitionType: 'Auto/Click, Auto/NoClick, Click',      
+          transitionType: 'Auto/Click, Auto/NoClick, Click',
+          thumbnail: 'url',
+          next: {},
+          prev: {}    
         },
         {
           type: 'TRANSITION',
           animation: 'color cycle', // blend, color cycle, random color, random positions, side scroller
           animationTime: 500, // ms
+          next: {},
+          prev: {}  
         }
       ],
       currentFrame: 0,
